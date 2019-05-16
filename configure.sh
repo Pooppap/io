@@ -17,14 +17,16 @@
 rm -f .bazelrc
 
 # Get user python
-read -p "Please specify Python executable [Default: `which python`]: " python_exe
-python_exe=${python_exe:-`which python`}
+read -p "Please specify Python executable [Default: `which python`]: " PYTHON_BIN_PATH
+PYTHON_BIN_PATH=${PYTHON_BIN_PATH:-`which python`}
 
 # Set up
-if  $python_exe -c "import tensorflow" &> /dev/null; then
+if  $PYTHON_BIN_PATH -c "import tensorflow" &> /dev/null; then
     echo 'using installed tensorflow'
 else
-    $python_exe -m pip install tensorflow
+    $PYTHON_BIN_PATH -m pip install tensorflow
 fi
-$python_exe -m pip install grpcio-tools
-$python_exe config_helper.py
+$PYTHON_BIN_PATH -m pip install grpcio-tools
+$PYTHON_BIN_PATH config_helper.py
+
+echo 'export PYTHON_BIN_PATH='$PYTHON_BIN_PATH | cat - .bazelrc  > temp && mv temp .bazelrc  
