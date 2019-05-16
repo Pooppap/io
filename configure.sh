@@ -15,10 +15,16 @@
 # ==============================================================================
 
 rm -f .bazelrc
-if python -c "import tensorflow" &> /dev/null; then
+
+# Get user python
+read -p "Please specify Python executable [Default: `which python`]: " python_exe
+python_exe=${python_exe:-`which python`}
+
+# Set up
+if  $python_exe -c "import tensorflow" &> /dev/null; then
     echo 'using installed tensorflow'
 else
-    pip install tensorflow
+    $python_exe -m pip install tensorflow
 fi
 python -m pip install grpcio-tools
 python config_helper.py
