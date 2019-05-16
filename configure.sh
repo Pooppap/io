@@ -26,5 +26,5 @@ if  $python_exe -c "import tensorflow" &> /dev/null; then
 else
     $python_exe -m pip install tensorflow
 fi
-python -m pip install grpcio-tools
-python config_helper.py
+$python_exe -m pip install grpcio-tools
+$python_exe config_helper.py
