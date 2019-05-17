@@ -15,6 +15,7 @@
 """Config Utility to write .bazelrc based on tensorflow."""
 from __future__ import print_function
 import re
+import os
 import tensorflow as tf
 
 def write_config():
@@ -69,11 +70,14 @@ def write_config():
     with open(".bazelrc", "w") as bazel_rc:
       for opt in opt_list:
         bazel_rc.write('build --copt="{}"\n'.format(opt))
+      
+      bazel_rc.write('build --action_env=PYTHON_BIN_PATH={}"\n'
+                     .format(os.environ['PYTHON_BIN_PATH']))
 
-      bazel_rc.write('build --action_env TF_HEADER_DIR="{}"\n'
+      bazel_rc.write('build --action_env=TF_HEADER_DIR="{}"\n'
                      .format(include_list[0][2:]))
 
-      bazel_rc.write('build --action_env TF_SHARED_LIBRARY_DIR="{}"\n'
+      bazel_rc.write('build --action_env=TF_SHARED_LIBRARY_DIR="{}"\n'
                      .format(libdir_list[0][2:]))
       bazel_rc.close()
   except OSError:

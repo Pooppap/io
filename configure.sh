@@ -19,6 +19,7 @@ rm -f .bazelrc
 # Get user python
 read -p "Please specify Python executable [Default: `which python`]: " PYTHON_BIN_PATH
 PYTHON_BIN_PATH=${PYTHON_BIN_PATH:-`which python`}
+export PYTHON_BIN_PATH
 
 # Set up
 if  $PYTHON_BIN_PATH -c "import tensorflow" &> /dev/null; then
@@ -28,5 +29,3 @@ else
 fi
 $PYTHON_BIN_PATH -m pip install grpcio-tools
 $PYTHON_BIN_PATH config_helper.py
-
-echo 'export PYTHON_BIN_PATH='$PYTHON_BIN_PATH | cat - .bazelrc  > temp && mv temp .bazelrc  
