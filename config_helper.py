@@ -71,7 +71,7 @@ def write_config():
       for opt in opt_list:
         bazel_rc.write('build --copt="{}"\n'.format(opt))
       
-      bazel_rc.write('build --action_env=PYTHON_BIN_PATH={}"\n'
+      bazel_rc.write('build --action_env=PYTHON_BIN_PATH="{}"\n'
                      .format(os.environ['PYTHON_BIN_PATH']))
 
       bazel_rc.write('build --action_env=TF_HEADER_DIR="{}"\n'
