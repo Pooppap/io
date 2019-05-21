@@ -79,6 +79,7 @@ cc_library(
     ],
     linkstatic = True,
     deps = [
+        "@bazel_tools//tools/cpp:current_cc_toolchain",
         "@com_github_googlecloudplatform_google_cloud_cpp//google/cloud/bigtable:bigtable_client",
         "@com_googlesource_code_re2//:re2",
         "@local_config_tf//:libtensorflow_framework",
@@ -98,6 +99,7 @@ cc_library(
     ],
     linkstatic = True,
     deps = [
+        "@bazel_tools//tools/cpp:current_cc_toolchain",
         "@com_github_googlecloudplatform_google_cloud_cpp//google/cloud/bigtable:bigtable_client",
         "@local_config_tf//:libtensorflow_framework",
         "@local_config_tf//:tf_header_lib",
